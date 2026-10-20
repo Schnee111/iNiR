@@ -75,12 +75,12 @@ Region {
         if (root.window?.visible && quickWindow) quickWindow.update()
     }
     function apply(): void {
-        if (!root.window) return
+        if (!root.window || !root.window.BackgroundEffect) return
         root.window.BackgroundEffect.blurRegion = root.empty || !root.window.visible ? null : root
         root.commitFrame()
     }
     function kick(): void {
-        if (!root.window || root.empty || !root.window.visible) return root.apply()
+        if (!root.window || !root.window.BackgroundEffect || root.empty || !root.window.visible) return root.apply()
         root.window.BackgroundEffect.blurRegion = null
         root.window.BackgroundEffect.blurRegion = root
         root.commitFrame()
@@ -93,7 +93,7 @@ Region {
         function onVisibleChanged(): void { root.window.visible ? root.kick() : root.apply() }
     }
     Component.onCompleted: root.apply()
-    Component.onDestruction: if (root.window) root.window.BackgroundEffect.blurRegion = null
+    Component.onDestruction: if (root.window && root.window.BackgroundEffect) root.window.BackgroundEffect.blurRegion = null
 
     // The field's own distances (IrisField.frag), so a join is measured on the shape it draws.
     function boxDistance(s: var, x: real, y: real): real {
@@ -268,7 +268,7 @@ Region {
         readonly property bool disc: piece.p !== null && Math.abs(piece.p.width - piece.p.height) < 1
             && piece.p.radius >= piece.p.width / 2 - 0.5
         shape: piece.disc ? RegionShape.Ellipse : RegionShape.Rect
-        radius: piece.p && !piece.disc ? Math.ceil(piece.p.radius) : 0
+        // radius: piece.p && !piece.disc ? Math.ceil(piece.p.radius) : 0
     }
 
     Region {
@@ -282,7 +282,7 @@ Region {
             width: Math.max(0, root.windowWidth - 2 * edge)
             height: Math.max(0, root.windowHeight - 2 * edge)
             // Concentric with the frame's inner corner: the hole is grown by the pixel rounding of its edge.
-            radius: Math.round(root.cornerRadius + root.band - edge)
+            // radius: Math.round(root.cornerRadius + root.band - edge)
         }
     }
     // Empty: its only job is to make the region change, which schedules the window's polish.

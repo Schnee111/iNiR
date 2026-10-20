@@ -390,7 +390,7 @@ Scope {
             }
             strip.published = wanted
         }
-        Component.onDestruction: strip.BackgroundEffect.blurRegion = null
+        Component.onDestruction: if (strip && strip.BackgroundEffect) strip.BackgroundEffect.blurRegion = null
     }
 
     Strip { id: leftStrip; edge: "left" }
