@@ -902,7 +902,7 @@ show_status_environment() {
 
     # Panel family
     local panel_family="ii"
-    local user_cfg="$HOME/.config/illogical-impulse/config.json"
+    local user_cfg="$HOME/.config/inir/config.json"
     if [[ -r "$user_cfg" ]] && command -v jq >/dev/null 2>&1; then
         local pf
         pf="$(jq -r '.panelFamily // "ii"' "$user_cfg" 2>/dev/null)"

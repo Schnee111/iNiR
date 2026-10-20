@@ -1264,8 +1264,7 @@ ANIMATION_PRESETS_FILE = Path(__file__).resolve().parent.parent / "defaults" / "
 
 def _user_animation_presets_file():
     xdg = Path(os.environ.get("XDG_CONFIG_HOME", os.path.expanduser("~/.config")))
-    legacy = xdg / "illogical-impulse"
-    return (legacy if legacy.exists() else xdg / "inir") / "niri-animation-presets.json"
+    return (xdg / "inir") / "niri-animation-presets.json"
 
 
 def _load_animation_presets():

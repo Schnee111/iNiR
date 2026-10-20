@@ -16,16 +16,7 @@ def resolve_default_config_path() -> Path:
     xdg_config_home = Path(
         os.environ.get("XDG_CONFIG_HOME", str(Path.home() / ".config"))
     )
-    new_file = xdg_config_home / "inir" / "config.json"
-    old_file = xdg_config_home / "illogical-impulse" / "config.json"
-
-    if old_file.is_symlink() and new_file.exists():
-        return new_file
-    if old_file.exists():
-        return old_file
-    if new_file.exists():
-        return new_file
-    return new_file
+    return xdg_config_home / "inir" / "config.json"
 
 
 def generated_input_path(name: str) -> Path:

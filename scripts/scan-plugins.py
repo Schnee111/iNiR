@@ -13,16 +13,7 @@ import sys
 
 def resolve_shell_config_dir() -> str:
     xdg_config = os.environ.get("XDG_CONFIG_HOME", os.path.expanduser("~/.config"))
-    new_dir = os.path.join(xdg_config, "inir")
-    legacy_dir = os.path.join(xdg_config, "illogical-impulse")
-
-    if os.path.islink(legacy_dir) and os.path.isdir(new_dir):
-        return new_dir
-    if os.path.isdir(legacy_dir):
-        return legacy_dir
-    if os.path.isdir(new_dir):
-        return new_dir
-    return new_dir
+    return os.path.join(xdg_config, "inir")
 
 
 plugins_dir = os.path.join(resolve_shell_config_dir(), "plugins")

@@ -43,7 +43,7 @@ def _inir_path() -> str:
 
 def _config_path() -> Path:
     base = Path(os.environ.get("XDG_CONFIG_HOME", Path.home() / ".config"))
-    return base / "illogical-impulse" / "config.json"
+    return base / "inir" / "config.json"
 
 
 def _merged_panels(current: object, base: list[str]) -> list[str]:

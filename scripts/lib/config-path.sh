@@ -18,25 +18,6 @@ INIR_CONFIG_DIR_NEW="${XDG_CONFIG_HOME}/inir"
 INIR_CONFIG_DIR_OLD="${XDG_CONFIG_HOME}/illogical-impulse"
 
 inir_config_dir() {
-    # Legacy symlink -> new (post-migration steady state)
-    if [[ -L "$INIR_CONFIG_DIR_OLD" && -d "$INIR_CONFIG_DIR_NEW" ]]; then
-        printf '%s\n' "$INIR_CONFIG_DIR_NEW"
-        return
-    fi
-
-    # Legacy real directory wins for backwards compatibility.
-    if [[ -d "$INIR_CONFIG_DIR_OLD" ]]; then
-        printf '%s\n' "$INIR_CONFIG_DIR_OLD"
-        return
-    fi
-
-    # New path when legacy is absent.
-    if [[ -d "$INIR_CONFIG_DIR_NEW" ]]; then
-        printf '%s\n' "$INIR_CONFIG_DIR_NEW"
-        return
-    fi
-
-    # Fresh install default.
     printf '%s\n' "$INIR_CONFIG_DIR_NEW"
 }
 
